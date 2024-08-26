@@ -1,0 +1,11 @@
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/bin/Debug/net8.0/Risk.Domain.deps.json
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/bin/Debug/net8.0/Risk.Domain.dll
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/bin/Debug/net8.0/Risk.Domain.pdb
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/Risk.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/Risk.Domain.AssemblyInfoInputs.cache
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/Risk.Domain.AssemblyInfo.cs
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/Risk.Domain.csproj.CoreCompileInputs.cache
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/Risk.Domain.dll
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/refint/Risk.Domain.dll
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/Risk.Domain.pdb
+/Users/snowye/code/challenges/loan-manager/Risk/Risk/Risk.Domain/obj/Debug/net8.0/ref/Risk.Domain.dll
