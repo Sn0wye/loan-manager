@@ -27,8 +27,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Risk.Application\Risk.Application.csproj" />
-      <ProjectReference Include="..\Risk.Infrastructure\Risk.Infrastructure.csproj" />
-      <ProjectReference Include="..\Risk.Repository\Risk.Repository.csproj" />
       <ProjectReference Include="..\Risk.Service\Risk.Service.csproj" />
     </ItemGroup>
 

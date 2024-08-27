@@ -1,0 +1,57 @@
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Aa][Rr][Tt]ifacts/
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.sln.ide
+*.sln.dotsettings
+*.sln.suo
+*.pdb
+
+# Visual Studio Code files
+.vscode/
+
+# Rider files
+.idea/
+*.sln.iml
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+*.nuspec
+**/packages/*
+!**/packages/build/*
+!**/packages/build/README.md
+
+# Other files to ignore
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
+
+# Logs
+*.log
+*.tlog
+*.tgz
+*.gz
+*.zip
+
+# Environment settings
+*.env
+
+# Temporary files
+tmp/
+temp/
+
+# Misc
+.DS_Store
