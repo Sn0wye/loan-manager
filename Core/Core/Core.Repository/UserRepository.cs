@@ -1,5 +1,6 @@
 using Core.Domain.Entities;
 using Core.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Repository;
 
@@ -11,32 +12,32 @@ public class UserRepository()
     {
         _context = context;
     }
-    
-    public User? FindById(int id)
+
+    public async Task<User?> FindByIdAsync(int id)
     {
-        return _context.Users.FirstOrDefault(user => user.Id == id);
+        return await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
     }
 
-    public IEnumerable<User> GetAll()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
-        return _context.Users.ToList();
+        return await _context.Users.ToListAsync();
     }
 
-    public void Add(User user)
+    public async Task AddAsync(User user)
     {
-        _context.Users.Add(user);
-        _context.SaveChanges();
+        await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
     }
 
-    public void Update(User user)
+    public async Task UpdateAsync(User user)
     {
         _context.Users.Update(user);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void Delete(User user)
+    public async Task DeleteAsync(User user)
     {
         _context.Users.Remove(user);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

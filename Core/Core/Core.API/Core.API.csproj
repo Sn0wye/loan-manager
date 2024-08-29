@@ -25,9 +25,15 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Core.DTO\Core.DTO.csproj"/>
         <ProjectReference Include="..\Core.Infrastructure\Core.Infrastructure.csproj"/>
         <ProjectReference Include="..\Core.Repository\Core.Repository.csproj"/>
         <ProjectReference Include="..\Core.Service\Core.Service.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="DTO\"/>
+        <Folder Include="Model\"/>
     </ItemGroup>
 
 </Project>

@@ -1,25 +1,27 @@
 using Core.Domain.Entities;
 using Core.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Repository;
 
-public class LoanRepository()
+public class LoanRepository : ILoanRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public LoanRepository(ApplicationDbContext context) : this()
+    public LoanRepository(ApplicationDbContext context)
     {
         _context = context;
     }
 
-    public Loan? Find(int id)
+    public async Task<Loan?> FindAsync(int id)
     {
-        return _context.Loans.FirstOrDefault(loan => loan.Id == id);
+        return await _context.Loans.FirstOrDefaultAsync(loan => loan.Id == id);
     }
 
-    public void Add(Loan loan)
+    public async Task<Loan> AddAsync(Loan loan)
     {
-        _context.Loans.Add(loan);
-        _context.SaveChanges();
+        await _context.Loans.AddAsync(loan);
+        await _context.SaveChangesAsync();
+        return loan;
     }
 }

@@ -34,9 +34,9 @@ namespace Core.Infrastructure.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     age = table.Column<int>(type: "int", nullable: false),
-                    document = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    document = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     annual_income = table.Column<double>(type: "float", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -45,6 +45,18 @@ namespace Core.Infrastructure.Migrations
                 {
                     table.PrimaryKey("pk_users", x => x.id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_users_document",
+                table: "users",
+                column: "document",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_users_email",
+                table: "users",
+                column: "email",
+                unique: true);
         }
 
         /// <inheritdoc />

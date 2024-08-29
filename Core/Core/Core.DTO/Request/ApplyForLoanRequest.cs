@@ -1,4 +1,4 @@
-namespace API.Model.Request;
+namespace Core.DTO.Request;
 
 public class ApplyForLoanRequest
 {

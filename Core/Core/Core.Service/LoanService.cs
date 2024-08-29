@@ -5,7 +5,7 @@ using Core.Repository;
 
 namespace Core.Service;
 
-public class LoanService
+public class LoanService : ILoanService
 {
     private readonly LoanRepository _loanRepository;
     private readonly RiskAdapter _riskAdapter;
@@ -16,24 +16,29 @@ public class LoanService
         _riskAdapter = riskAdapter;
     }
 
-    public async Task<LoanApplicationResult> ApplyForLoan(User user, double loanAmount, int term)
+    public async Task<LoanApplication> ApplyForLoan(User user, double loanAmount, int term)
     {
-        var loan = new Loan(
-            user.Id,
-            loanAmount,
-            term
-        );
+        var loan = new Loan
+        {
+            UserId = user.Id,
+            Amount = loanAmount,
+            Term = term
+        };
 
-        var riskRequest = new CalculateRiskRequest();
-        riskRequest.TotalIncome = user.AnnualIncome;
-        riskRequest.LoanAmount = loanAmount;
-        riskRequest.Term = term;
+        var riskRequest = new CalculateRiskRequest
+        {
+            TotalIncome = user.AnnualIncome,
+            LoanAmount = loanAmount,
+            Term = term
+        };
 
         var riskResponse = await _riskAdapter.CalculateRisk(riskRequest);
 
-        var scoreRequest = new CalculateScoreRequest();
-        scoreRequest.YearlyIncome = user.AnnualIncome;
-        scoreRequest.Risk = riskResponse.Risk;
+        var scoreRequest = new CalculateScoreRequest
+        {
+            YearlyIncome = user.AnnualIncome,
+            Risk = riskResponse.Risk
+        };
 
         var scoreResponse = await _riskAdapter.CalculateScore(scoreRequest);
 
@@ -41,8 +46,8 @@ public class LoanService
         if (scoreResponse.Score >= 600)
         {
             loan.ChangeStatus(LoanStatus.APPROVED);
-            suggestedLoan = SuggestBetterLoan(user, riskResponse.Risk, scoreResponse.Score);
-            return new LoanApplicationResult
+            suggestedLoan = await SuggestBetterLoan(user, riskResponse.Risk, scoreResponse.Score);
+            return new LoanApplication
             {
                 Loan = loan,
                 SuggestedLoan = suggestedLoan
@@ -51,15 +56,15 @@ public class LoanService
 
 
         loan.ChangeStatus(LoanStatus.REJECTED);
-        suggestedLoan = SuggestBetterLoan(user, riskResponse.Risk, scoreResponse.Score);
-        return new LoanApplicationResult
+        suggestedLoan = await SuggestBetterLoan(user, riskResponse.Risk, scoreResponse.Score);
+        return new LoanApplication
         {
             Loan = loan,
             SuggestedLoan = suggestedLoan
         };
     }
 
-    private Loan SuggestBetterLoan(User user, double risk, double score)
+    private async Task<Loan> SuggestBetterLoan(User user, double risk, double score)
     {
         double recommendedAmount;
         int recommendedTerm;
@@ -90,16 +95,21 @@ public class LoanService
         }
 
         // Create and return the suggested loan
-        var loan = new Loan(user.Id, recommendedAmount, recommendedTerm);
-        loan.ChangeStatus(LoanStatus.PENDING);
-        _loanRepository.Add(loan);
+        var newSuggestedLoan = new Loan
+        {
+            UserId = user.Id,
+            Amount = recommendedAmount,
+            Term = recommendedTerm
+        };
+        newSuggestedLoan.ChangeStatus(LoanStatus.PENDING);
+        var suggestedLoan = await _loanRepository.AddAsync(newSuggestedLoan);
 
-        return loan;
+        return suggestedLoan;
     }
 }
 
-public class LoanApplicationResult
+public class LoanApplication
 {
-    public Loan Loan { get; set; }
+    public required Loan Loan { get; set; }
     public Loan? SuggestedLoan { get; set; }
 }

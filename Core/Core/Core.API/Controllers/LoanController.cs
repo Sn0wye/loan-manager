@@ -1,7 +1,7 @@
-using API.Model.Request;
-using API.Model.Response;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
+using Core.DTO.Request;
+using Core.DTO.Response;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,15 +23,16 @@ public class LoanController
     [HttpPost("/apply")]
     public async Task<ActionResult<ApplyForLoanResponse>> ApplyForLoan([FromBody] ApplyForLoanRequest request)
     {
-        var user = new User(
-            request.Name,
-            request.Email,
-            request.Age,
-            request.Document,
-            request.AnnualIncome
-        );
+        var user = new User
+        {
+            Name = request.Name,
+            Email = request.Email,
+            Age = request.Age,
+            Document = request.Document,
+            AnnualIncome = request.AnnualIncome
+        };
 
-        var createdUser = _userService.CreateUser(user);
+        var createdUser = await _userService.CreateUser(user);
 
         var application = await _loanService.ApplyForLoan(
             createdUser,
@@ -46,25 +47,27 @@ public class LoanController
                 ? "Loan approved :)"
                 : "Loan rejected, unfortunately we don't have a better option for you at the moment :(";
 
-            return new ApplyForLoanResponse(
-                application.Loan.Status,
-                message,
-                application.Loan.Amount,
-                application.Loan.Term,
-                null
-            );
+            return new ApplyForLoanResponse
+            {
+                Message = message,
+                Status = application.Loan.Status,
+                Amount = application.Loan.Amount,
+                Term = application.Loan.Term,
+                SuggestedLoan = null
+            };
         }
 
         message = application.Loan.Status == LoanStatus.APPROVED
             ? "Loan approved, but we have a better option for you!"
             : "Loan rejected, but we have a better option for you!";
 
-        return new ApplyForLoanResponse(
-            application.Loan.Status,
-            message,
-            application.Loan.Amount,
-            application.Loan.Term,
-            application.SuggestedLoan
-        );
+        return new ApplyForLoanResponse
+        {
+            Message = message,
+            Status = application.Loan.Status,
+            Amount = application.Loan.Amount,
+            Term = application.Loan.Term,
+            SuggestedLoan = application.SuggestedLoan
+        };
     }
 }
