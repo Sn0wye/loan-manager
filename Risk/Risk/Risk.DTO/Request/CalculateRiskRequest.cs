@@ -5,8 +5,8 @@ namespace Risk.DTO.Request;
 public class CalculateRiskRequest
 {
     [Required]
-    [Range(0, double.MaxValue, ErrorMessage = "Total income must be a non-negative number.")]
-    public double TotalIncome { get; set; }
+    [Range(0, double.MaxValue, ErrorMessage = "Yearly income must be a non-negative number.")]
+    public double YearlyIncome { get; set; }
     [Required]
     [Range(0, double.MaxValue, ErrorMessage = "Loan amount must be a non-negative number.")]
     public double LoanAmount { get; set; }
