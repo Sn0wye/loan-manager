@@ -1,12 +1,12 @@
-using Risk.Application.DTO;
+using Risk.DTO.Request;
 
 namespace Risk.Service;
 
-public class CalculateScoreService
+public class CalculateScoreService: ICalculateScoreService
 {
        private const double MaximumIncome = 100000;
        
-       public int CalculateCreditScore(CalculateScoreDTO dto)
+       public int CalculateCreditScore(CalculateScoreRequest dto)
        {
               // Ensure risk is between 0 and 1
               if (dto.Risk is < 0 or > 1)

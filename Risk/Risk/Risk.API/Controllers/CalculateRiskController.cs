@@ -1,6 +1,6 @@
-using Risk.Application.DTO;
-using Risk.Application.Model;
 using Microsoft.AspNetCore.Mvc;
+using Risk.DTO.Request;
+using Risk.DTO.Response;
 using Risk.Service;
 
 namespace Risk.API.Controllers;
@@ -9,19 +9,18 @@ namespace Risk.API.Controllers;
 [Route("risk")]
 public class CalculateRiskController
 {
-    private readonly CalculateRiskService _calculateRiskService = new();
+    private readonly ICalculateRiskService _calculateRiskService;
+    
+    public CalculateRiskController(ICalculateRiskService calculateRiskService)
+    {
+        _calculateRiskService = calculateRiskService;
+    }
     
     [HttpPost("calculate")]
     public ActionResult<CalculateRiskResponse> CalculateRisk([FromBody] CalculateRiskRequest body)
     {
 
-        var dto = new CalculateRiskDTO(
-            body.TotalIncome,
-            body.LoanAmount,
-            body.Term
-        );
-
-        var risk = _calculateRiskService.CalculateRisk(dto);
+        var risk = _calculateRiskService.CalculateRisk(body);
         
         return new CalculateRiskResponse
         {

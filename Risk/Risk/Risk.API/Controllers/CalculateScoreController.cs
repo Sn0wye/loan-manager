@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Risk.Application.DTO;
-using Risk.Application.Model;
+using Risk.DTO.Request;
+using Risk.DTO.Response;
 using Risk.Service;
 
 namespace Risk.API.Controllers;
@@ -9,18 +9,17 @@ namespace Risk.API.Controllers;
 [Route("score")]
 public class CalculateScoreController
 {
-    private readonly CalculateScoreService _calculateScoreService = new();
+    private readonly ICalculateScoreService _calculateScoreService;
+    
+    public CalculateScoreController(ICalculateScoreService calculateScoreService)
+    {
+        _calculateScoreService = calculateScoreService;
+    }
     
     [HttpPost("calculate")]
     public ActionResult<CalculateScoreResponse> CalculateScore([FromBody] CalculateScoreRequest body)
     {
-
-        var dto = new CalculateScoreDTO(
-            body.YearlyIncome,
-            body.Risk
-        );
-        
-        var score = _calculateScoreService.CalculateCreditScore(dto);
+        var score = _calculateScoreService.CalculateCreditScore(body);
         
         return new CalculateScoreResponse
         {

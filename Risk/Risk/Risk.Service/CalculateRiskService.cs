@@ -1,15 +1,15 @@
-using Risk.Application.DTO;
+using Risk.DTO.Request;
 
 namespace Risk.Service;
 
-public class CalculateRiskService
+public class CalculateRiskService: ICalculateRiskService
 {
-    public double CalculateRisk(CalculateRiskDTO dto)
+    public double CalculateRisk(CalculateRiskRequest dto)
     {
         double monthlyInstallment = dto.LoanAmount / dto.Term;
 
         // Calculate the income-to-installment ratio
-        double incomeToInstallmentRatio = dto.YearlyIncome / monthlyInstallment;
+        double incomeToInstallmentRatio = dto.TotalIncome / monthlyInstallment;
 
         // Normalize the ratio to a value between 0 and 1
         double risk = 1.0 / incomeToInstallmentRatio;
