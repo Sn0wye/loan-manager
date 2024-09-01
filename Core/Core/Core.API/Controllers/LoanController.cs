@@ -10,10 +10,10 @@ namespace API.Controllers;
 [Route("loan")]
 public class LoanController : ControllerBase
 {
-    private readonly LoanService _loanService;
-    private readonly UserService _userService;
+    private readonly ILoanService _loanService;
+    private readonly IUserService _userService;
 
-    public LoanController(LoanService loanService, UserService userService)
+    public LoanController(ILoanService loanService, IUserService userService)
     {
         _loanService = loanService;
         _userService = userService;

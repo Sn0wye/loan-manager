@@ -22,6 +22,7 @@
         <Content Include="..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
+        <Content Remove="DTO\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -32,8 +33,19 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="DTO\"/>
         <Folder Include="Model\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="DTO\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Remove="DTO\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="DTO\**"/>
     </ItemGroup>
 
 </Project>
