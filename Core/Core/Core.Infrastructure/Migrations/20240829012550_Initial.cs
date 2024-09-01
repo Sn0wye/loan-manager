@@ -37,7 +37,7 @@ namespace Core.Infrastructure.Migrations
                     email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     age = table.Column<int>(type: "int", nullable: false),
                     document = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    annual_income = table.Column<double>(type: "float", nullable: false),
+                    yearly_income = table.Column<double>(type: "float", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     updated_at = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

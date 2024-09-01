@@ -67,7 +67,7 @@ public class RiskAdapter
 
 public class CalculateRiskRequest
 {
-    public double TotalIncome { get; set; }
+    public double YearlyIncome { get; set; }
     public double LoanAmount { get; set; }
     public int Term { get; set; }
 }

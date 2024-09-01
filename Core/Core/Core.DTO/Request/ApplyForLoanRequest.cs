@@ -16,9 +16,9 @@ public class ApplyForLoanRequest
     [Required(ErrorMessage = "Document is required.")]
     public string Document { get; set; }
 
-    [Required(ErrorMessage = "Annual income is required.")]
-    [Range(0.01, double.MaxValue, ErrorMessage = "Annual income must be greater than 0.")]
-    public double AnnualIncome { get; set; }
+    [Required(ErrorMessage = "Yearly income is required.")]
+    [Range(0.01, double.MaxValue, ErrorMessage = "Yearly income must be greater than 0.")]
+    public double YearlyIncome { get; set; }
 
     [Required(ErrorMessage = "Loan amount is required.")]
     [Range(0.01, double.MaxValue, ErrorMessage = "Loan amount must be greater than 0.")]

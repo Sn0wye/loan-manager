@@ -66,9 +66,9 @@ namespace Core.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("age");
 
-                    b.Property<double>("AnnualIncome")
+                    b.Property<double>("YearlyIncome")
                         .HasColumnType("float")
-                        .HasColumnName("annual_income");
+                        .HasColumnName("yearly_income");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2")

@@ -30,7 +30,7 @@ public class LoanController : ControllerBase
             Email = request.Email,
             Age = request.Age,
             Document = request.Document,
-            AnnualIncome = request.AnnualIncome
+            YearlyIncome = request.YearlyIncome
         };
 
         var createdUser = await _userService.CreateUser(user);

@@ -27,7 +27,7 @@ public class LoanService : ILoanService
 
         var riskRequest = new CalculateRiskRequest
         {
-            TotalIncome = user.AnnualIncome,
+            YearlyIncome = user.YearlyIncome,
             LoanAmount = loanAmount,
             Term = term
         };
@@ -36,7 +36,7 @@ public class LoanService : ILoanService
 
         var scoreRequest = new CalculateScoreRequest
         {
-            YearlyIncome = user.AnnualIncome,
+            YearlyIncome = user.YearlyIncome,
             Risk = riskResponse.Risk
         };
 
@@ -78,19 +78,19 @@ public class LoanService : ILoanService
         if (score >= highScoreThreshold && risk <= lowRiskThreshold)
         {
             // High score, low risk: suggest a larger loan with a longer term
-            recommendedAmount = user.AnnualIncome * 0.5; // 50% of annual income
+            recommendedAmount = user.YearlyIncome * 0.5; // 50% of yearly income
             recommendedTerm = 36; // Longer term, e.g., 36 months
         }
         else if (score <= lowScoreThreshold || risk >= highRiskThreshold)
         {
             // Low score or high risk: suggest a smaller loan with a shorter term
-            recommendedAmount = user.AnnualIncome * 0.2; // 20% of annual income
+            recommendedAmount = user.YearlyIncome * 0.2; // 20% of yearly income
             recommendedTerm = 12; // Shorter term, e.g., 12 months
         }
         else
         {
             // Moderate score and risk: suggest a moderate loan
-            recommendedAmount = user.AnnualIncome * 0.35; // 35% of annual income
+            recommendedAmount = user.YearlyIncome * 0.35; // 35% of yearly income
             recommendedTerm = 24; // Moderate term, e.g., 24 months
         }
 
