@@ -1,14 +1,15 @@
 using Core.Domain.Entities;
 using Core.Infrastructure;
+using Core.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Repository;
 
-public class UserRepository()
+public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public UserRepository(ApplicationDbContext context) : this()
+    public UserRepository(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -16,6 +17,16 @@ public class UserRepository()
     public async Task<User?> FindByIdAsync(int id)
     {
         return await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
+    }
+
+    public async Task<User?> FindByDocumentAsync(string document)
+    {
+        return await _context.Users.FirstOrDefaultAsync(user => user.Document == document);
+    }
+
+    public async Task<User?> FindByEmailAsync(string email)
+    {
+        return await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()

@@ -1,4 +1,5 @@
 using System.Globalization;
+using Core.Errors;
 using Core.Infrastructure;
 using Core.Repository;
 using Core.Service;
@@ -55,11 +56,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        c.RoutePrefix = string.Empty;
+        c.RoutePrefix = "swagger";
     });
 }
 
 app.UseHttpsRedirection();
 
 app.MapControllers();
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.Run();

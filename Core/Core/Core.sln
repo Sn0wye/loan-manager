@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Service", "Core.Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.DTO", "Core.DTO\Core.DTO.csproj", "{A2BC233F-75BF-409D-A41F-B238F44C0CB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Exceptions", "Core.Exceptions\Core.Exceptions.csproj", "{E290F925-D7CE-4AAF-A450-0A5C1C38C06D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{A2BC233F-75BF-409D-A41F-B238F44C0CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2BC233F-75BF-409D-A41F-B238F44C0CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2BC233F-75BF-409D-A41F-B238F44C0CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E290F925-D7CE-4AAF-A450-0A5C1C38C06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E290F925-D7CE-4AAF-A450-0A5C1C38C06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E290F925-D7CE-4AAF-A450-0A5C1C38C06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E290F925-D7CE-4AAF-A450-0A5C1C38C06D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

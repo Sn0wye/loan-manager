@@ -1,6 +1,5 @@
 using Core.Domain.Entities;
 using Core.Domain.Enums;
-using Core.DTO.Request;
 using Core.DTO.Response;
 using Core.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +8,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("loan")]
-public class LoanController
+public class LoanController : ControllerBase
 {
     private readonly LoanService _loanService;
     private readonly UserService _userService;
@@ -23,6 +22,8 @@ public class LoanController
     [HttpPost("/apply")]
     public async Task<ActionResult<ApplyForLoanResponse>> ApplyForLoan([FromBody] ApplyForLoanRequest request)
     {
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
         var user = new User
         {
             Name = request.Name,
