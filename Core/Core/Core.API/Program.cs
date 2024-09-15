@@ -23,10 +23,7 @@ builder.Services.AddScoped<LoanRepository>();
 builder.Services.AddScoped<UserRepository>();
 
 // Adapters
-builder.Services.AddHttpClient<RiskAdapter>(client =>
-    {
-        client.BaseAddress = new Uri("http://localhost:8081"); // Set the base address here
-    })
+builder.Services.AddHttpClient<RiskAdapter>(client => { client.BaseAddress = new Uri("http://risk:8081"); })
     .ConfigurePrimaryHttpMessageHandler(() =>
     {
         var handler = new HttpClientHandler
@@ -50,17 +47,17 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// if (app.Environment.IsDevelopment())
+// {
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        c.RoutePrefix = "swagger";
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core API V1");
+    c.RoutePrefix = string.Empty;
+});
+// }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.MapControllers();
 app.UseMiddleware<ErrorHandlingMiddleware>();

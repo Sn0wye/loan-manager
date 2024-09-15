@@ -12,3 +12,25 @@ services:
       MSSQL_ENABLE_HSTS: '0'
     ports:
       - '1433:1433'
+
+  core:
+    build:
+      context: ./Core/Core
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - '8080:8080'
+    depends_on:
+      - sql-server
+
+  risk:
+    build:
+      context: ./Risk/Risk
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - '8081:8081'
+    depends_on:
+      - sql-server
